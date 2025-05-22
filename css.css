@@ -1,11 +1,24 @@
+
+html, body {
+  height: auto; 
+  overflow-y: auto; 
+}
+
 body {
   background-color: #1a1a1a;
-  color: #fff;
+  color: #F9F4EB;
   margin: 0;
   font-family: 'Inter', sans-serif;
+  padding-top: 70px;
 }
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #1a1a1a;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,16 +29,43 @@ body {
 .logo {
   font-size: 30px;
   font-weight: bold;
+  color: #F9F4EB;
+}
+
+#nav-toggle {
+  display: none;
+}
+
+.burger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  order: 4;
+}
+
+.burger span {
+  width: 25px;
+  height: 3px;
+  background-color: #F9F4EB;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 .nav-links {
   display: flex;
   gap: 3rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+  white-space: nowrap;
+  padding-bottom: 0.2rem;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #fff;
+  color: #F9F4EB;
   font-weight: 500;
   font-size: 20px;
   cursor: pointer;
@@ -35,20 +75,20 @@ body {
 }
 
 .nav-links a:hover {
-  border-bottom-color: #fff;
+  border-bottom-color: #F9F4EB;
   color: #ccc;
 }
 
 .nav-links a.active {
-  border-bottom-color: #fff;
+  border-bottom-color: #F9F4EB;
 }
 
 .nav-right a {
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border: 2px solid #fff;
+  border: 2px solid #F9F4EB;
   border-radius: 4px;
-  color: #fff;
+  color: #F9F4EB;
   font-weight: 500;
   font-size: 20px;
   cursor: pointer;
@@ -56,15 +96,28 @@ body {
 }
 
 .nav-right a:hover {
-  background-color: #fff;
+  background-color: #F9F4EB;
   color: #1a1a1a;
-  border-color: #fff;
+  border-color: #F9F4EB;
 }
 
 .nav-right a.active {
-  background-color: #fff;
+  background-color: #F9F4EB;
   color: #333;
-  border-color: #fff;
+  border-color: #F9F4EB;
+}
+
+@keyframes spinOnce {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card img {
+  animation: spinOnce 1s ease;
 }
 
 .hero-header {
@@ -75,13 +128,14 @@ body {
   height: 70vh;
   padding-left: 10rem;
   padding-top: 2rem;
-  color: #fff;
+  color: #F9F4EB;
 }
 
 .hero-header .intro {
   font-size: 50px;
   margin: 0;
   font-weight: 400;
+  color: #F9F4EB;
 }
 
 .hero-header .name {
@@ -90,6 +144,7 @@ body {
   margin: 0.10rem 0 0;
   line-height: 1;
   word-break: break-word;
+  color: #F9F4EB;
 }
 
 .hero-header .student {
@@ -106,7 +161,7 @@ body {
   padding: 0.5rem 1rem;
   font-size: 20px;
   font-weight: 500;
-  color: #fff;
+  color: #F9F4EB;
   background-color: transparent;
   border: 2px solid #333;
   border-radius: 4px;
@@ -115,9 +170,9 @@ body {
 }
 
 .download-btn:hover {
-  background-color: #fff;
+  background-color: #F9F4EB;
   color: #1a1a1a;
-  border-color: #fff;
+  border-color: #F9F4EB;
 }
 
 .hero-container {
@@ -129,7 +184,6 @@ body {
   padding-right: 3rem;
 }
 
-/* CARD AND IMAGE */
 .card {
   flex: 0 0 250px;
   height: 300px;
@@ -140,13 +194,12 @@ body {
   width: 250px;
   height: 300px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
   transform: rotate(5deg);
   transition: transform 0.3s ease;
   display: block;
 }
 
-/* Responsive styles */
 @media (max-width: 1024px) {
   .hero-header {
     padding-left: 4rem;
@@ -169,7 +222,6 @@ body {
     max-width: 90%;
   }
 
-  /* NAVIGATION MOBILE IMPROVEMENTS */
   .navbar {
     flex-direction: column;
     align-items: flex-start;
@@ -180,6 +232,7 @@ body {
     gap: 1rem;
     margin-top: 1rem;
     width: 100%;
+    display: none;
   }
 
   .nav-links a {
@@ -192,6 +245,7 @@ body {
   .nav-right {
     width: 100%;
     margin-top: 1rem;
+    display: none;
   }
 
   .nav-right a {
@@ -200,6 +254,18 @@ body {
     text-align: center;
     font-size: 18px;
     padding: 0.5rem 0;
+  }
+
+  .burger {
+    display: flex;
+    order: 4;
+    margin-left: auto;
+  }
+
+  #nav-toggle:checked ~ .nav-links,
+  #nav-toggle:checked ~ .nav-right {
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -246,4 +312,30 @@ body {
   .logo {
     font-size: 24px;
   }
+}
+
+.about-me {
+  background-color: #F9F4EB; 
+  color: #25282B;
+  padding: 20px 80px 140px 80px; 
+  max-width: 100%;
+  margin: 100px auto 100px auto;  
+  font-family: Arial, sans-serif;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);  
+  font-size: 1.8rem;  
+  line-height: 2;   
+}
+
+.about-me h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #25282B;
+  margin-top: 20px;  
+}
+
+.about-me p {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #25282B;
 }
